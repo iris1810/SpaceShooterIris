@@ -1,41 +1,44 @@
 using UnityEngine;
 
-public class player : MonoBehaviour
-{
+public class player : MonoBehaviour {
+    private SpaceShooter inputActions;
+    public float speed = 0.1f;
+    //private const float Y_LIMIT = 4.52f;
+
     // set in inpector
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
-        inputActions = new ();
-        inputActions.Enables();
-        inputACtions.Standard.Enable();
+        inputActions = new();
+        inputActions.Enable();
+        inputActions.Standard.Enable();
 
 
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (inputAction.Standard.Fire.WasPressedThisFrame())
-        {
-            instanciate(bulletPrefab,bulletSpawnPoint.position,Quaternion.identity);
-        }
-        if (inputActions.Standard.MoveUp.isPressed())
+    private void Update()
+{
+        // if (inputActions.Standard.Fire.WasPressedThisFrame())
+        // {
+        //     Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        // }
+        if (inputActions.Standard.MoveUp.IsPressed())
         {
             this.transform.Translate(Vector3.up * speed);
         }
-        else if ( inputActions.Standard.MoveDown.isPressed())
+        else if ( inputActions.Standard.MoveDown.IsPressed())
         {
             this.transform.Translate(Vector3.down * speed);
         }
-        if (this.transform.position.y > Y_LIMIT)
+        if (this.transform.position.y > 4.52f)
         {
-         this.transform.position = new Vector3(this.transform.position.x, Y_LIMIT);   
+         this.transform.position = new Vector3(this.transform.position.x, 4.52f);   
         }
-        else if (this.transform.position.y < -Y_LIMIT)
+        else if (this.transform.position.y < -4.67f)
         {
-         this.transform.position = new Vector3(this.transform.position.x, -Y_LIMIT);   
+         this.transform.position = new Vector3(this.transform.position.x, -4.67f);
         }
     }
 }
