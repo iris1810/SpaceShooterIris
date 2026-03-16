@@ -109,6 +109,15 @@ public partial class @SpaceShooter: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""5079dbc5-79d8-4f8c-aa80-c109b14ce938"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -155,6 +164,17 @@ public partial class @SpaceShooter: IInputActionCollection2, IDisposable
                     ""action"": ""Move Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4fa7cfe-a800-4b36-8b98-2e2db4ce1b2c"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -165,6 +185,7 @@ public partial class @SpaceShooter: IInputActionCollection2, IDisposable
         m_Standard = asset.FindActionMap("Standard", throwIfNotFound: true);
         m_Standard_MoveUp = m_Standard.FindAction("Move Up", throwIfNotFound: true);
         m_Standard_MoveDown = m_Standard.FindAction("Move Down", throwIfNotFound: true);
+        m_Standard_Fire = m_Standard.FindAction("Fire", throwIfNotFound: true);
     }
 
     ~@SpaceShooter()
@@ -247,6 +268,7 @@ public partial class @SpaceShooter: IInputActionCollection2, IDisposable
     private List<IStandardActions> m_StandardActionsCallbackInterfaces = new List<IStandardActions>();
     private readonly InputAction m_Standard_MoveUp;
     private readonly InputAction m_Standard_MoveDown;
+    private readonly InputAction m_Standard_Fire;
     /// <summary>
     /// Provides access to input actions defined in input action map "Standard".
     /// </summary>
@@ -266,6 +288,10 @@ public partial class @SpaceShooter: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Standard/MoveDown".
         /// </summary>
         public InputAction @MoveDown => m_Wrapper.m_Standard_MoveDown;
+        /// <summary>
+        /// Provides access to the underlying input action "Standard/Fire".
+        /// </summary>
+        public InputAction @Fire => m_Wrapper.m_Standard_Fire;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -298,6 +324,9 @@ public partial class @SpaceShooter: IInputActionCollection2, IDisposable
             @MoveDown.started += instance.OnMoveDown;
             @MoveDown.performed += instance.OnMoveDown;
             @MoveDown.canceled += instance.OnMoveDown;
+            @Fire.started += instance.OnFire;
+            @Fire.performed += instance.OnFire;
+            @Fire.canceled += instance.OnFire;
         }
 
         /// <summary>
@@ -315,6 +344,9 @@ public partial class @SpaceShooter: IInputActionCollection2, IDisposable
             @MoveDown.started -= instance.OnMoveDown;
             @MoveDown.performed -= instance.OnMoveDown;
             @MoveDown.canceled -= instance.OnMoveDown;
+            @Fire.started -= instance.OnFire;
+            @Fire.performed -= instance.OnFire;
+            @Fire.canceled -= instance.OnFire;
         }
 
         /// <summary>
@@ -369,5 +401,12 @@ public partial class @SpaceShooter: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnMoveDown(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Fire" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFire(InputAction.CallbackContext context);
     }
 }

@@ -2,11 +2,13 @@ using UnityEngine;
 
 public class player : MonoBehaviour {
     private SpaceShooter inputActions;
+    // set in inpector
     public float speed = 0.1f;
     //private const float Y_LIMIT = 4.52f;
+    public GameObject bulletPrefab;
+    public Transform bulletSpawnPoint;
 
-    // set in inpector
-
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
     {
@@ -20,17 +22,17 @@ public class player : MonoBehaviour {
     // Update is called once per frame
     private void Update()
 {
-        // if (inputActions.Standard.Fire.WasPressedThisFrame())
-        // {
-        //     Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
-        // }
+        if (inputActions.Standard.Fire.WasPressedThisFrame())
+        {
+            GameObject bulletObj = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+        }
         if (inputActions.Standard.MoveUp.IsPressed())
         {
-            this.transform.Translate(Vector3.up * speed);
+            this.transform.Translate(Vector3.up * speed *Time.deltaTime);
         }
         else if ( inputActions.Standard.MoveDown.IsPressed())
         {
-            this.transform.Translate(Vector3.down * speed);
+            this.transform.Translate(Vector3.down * speed *Time.deltaTime);
         }
         if (this.transform.position.y > 4.52f)
         {
